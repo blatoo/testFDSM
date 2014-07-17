@@ -123,33 +123,10 @@ public class CooccFkt {
 		}
 
 	}
-
-	public static void readCooccSecAddTopRight2(MyBitSet[] adjM, int[][] coocc) {
-
-		int adjM_length = adjM.length;
-
-		int[] primaryIds = null;
-
-		for (int i = 0; i < adjM_length; i++) {
-
-			primaryIds = adjM[i].toArray();
-
-			int i_length = primaryIds.length;
-
-			for (int j = 0; j < i_length; j++) {
-
-				for (int k = j + 1; k < i_length; k++) {
-
-					coocc[primaryIds[j]][primaryIds[k]]++;
-
-				}
-			}
-
-		}
-
-	}
 	
 	
+
+
 	/**
 	 * Decrease cooccurence from a bipartite Graph MyBitSet[], every MyBitSet
 	 * from this array represent the friends(PrimaryIds) of a SecondaryId.

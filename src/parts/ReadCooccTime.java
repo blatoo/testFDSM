@@ -6,7 +6,7 @@ import structure.BipartiteGraph;
 import structure.CooccFkt;
 import util.MyBitSet;
 
-public class readCoocc {
+public class ReadCooccTime {
 
 	public static void run() {
 
@@ -30,13 +30,13 @@ public class readCoocc {
 		
 		long t3 = t2-t1;
 		
-		System.out.println("read cooccurence from inputFile uses "+t3+" millionseconds");
+		System.out.println("read cooccurence from inputFile uses "+(double)t3/1000+" millionseconds");
 
 		
 	}
 
 	public static void main(String[] args) {
-//		run();
+		run();
 		
 	}
 
