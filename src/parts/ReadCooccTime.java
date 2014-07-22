@@ -1,7 +1,5 @@
 package parts;
 
-import java.util.HashMap;
-
 import structure.BipartiteGraph;
 import structure.CooccFkt;
 import util.MyBitSet;
@@ -15,7 +13,7 @@ public class ReadCooccTime {
 
 		int numberOfPrimaryIds = bG.numberOfPrimaryIds;
 
-		// Construct the bipartite graph. Fomat: Adjacency matrix. SecondaryIds
+		// Construct the bipartite graph. Format: Adjacency matrix. SecondaryIds
 		// and its friends in the other side of the bipartite graph.(just like
 		// user(SecondaryId) and his voted movies(PrimaryIds). )
 		MyBitSet[] adjMSec = bG.toSecBS();
@@ -34,10 +32,19 @@ public class ReadCooccTime {
 
 		
 	}
+	
+	public static void test(){
+		BipartiteGraph bG = new BipartiteGraph();
+		
+		System.out.println("numberOfPrimaryIds = "+bG.numberOfPrimaryIds);
+		System.out.println("numberOfSecondaryIdsAll = "+bG.numberOfSamplesAll);
+		System.out.println("numberOfSecondaryIds = "+bG.numberOfSamples);
+		
+		
+	}
 
 	public static void main(String[] args) {
 		run();
-		
 	}
 
 }

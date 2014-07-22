@@ -41,16 +41,13 @@ public class SwapTime {
 
 	public static void main(String[] args) {
 
-		BipartiteGraph bG = new BipartiteGraph(Setting.inputFile);
+		BipartiteGraph bG = new BipartiteGraph();
 		
-		int numberOfSwaps = (int)Math.log(20000)*20000;
+		System.out.println(bG.numberOfEdges);
 		
-		System.out.println((int)Math.log(20000));
+		int numberOfSwaps = (int)Math.log(bG.numberOfEdges)*bG.numberOfSamples;
 		
-		run(numberOfSwaps);
-		
-		
-
+		System.out.println("Swap steps is "+numberOfSwaps);
 		
 	}
 

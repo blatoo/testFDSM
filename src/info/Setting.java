@@ -3,7 +3,7 @@ package info;
 public class Setting {
 
 	// general settings
-	public static String inputFile = "Netflix/selectedEntriesSecondaryId_Model_1.txt";
+	public static String inputFile = "/home/ygu/Ying/fdsmData/Output2/selectModel1_from0_to10000_rating45.txt";
 	public static String outputRoot = "/home/ygu/Ying/fdsmData/Output2";
 
 	// additionally for FDSM (LevFDSM, SLevFDSM, PValue, ZScore,PresortedZscore)

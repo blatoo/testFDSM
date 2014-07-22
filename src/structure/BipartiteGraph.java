@@ -1,7 +1,6 @@
 package structure;
 
 import gnu.trove.set.hash.TIntHashSet;
-import info.DataSource;
 import info.Setting;
 import info.dataReadWrite;
 
@@ -10,33 +9,26 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 import util.MyBitSet;
 import util.MyFastBitSet;
-import util.Text;
 
 public class BipartiteGraph {
 
 	public String inputTXT = Setting.inputFile;
 	// this numberOfSmaples represent the number of secondaryIds
 	public int numberOfSamples = 20000;
+	
+	public int numberOfSamplesAll = 20000;
 
 	public int numberOfPrimaryIds = 17770;
 
 	public int numberOfEdges = 2347218;
 
 	public BipartiteGraph() {
-
-//		if (DataSource.selectModel == 1) {
-//			this.inputTXT = dataReadWrite.selectedEntriesSecondaryId_Model_1TXT;
-//		} else {
-//			this.inputTXT = dataReadWrite.selectedEntriesSecondaryId_Model_2TXT;
-//		}
 
 		try {
 
@@ -47,7 +39,10 @@ public class BipartiteGraph {
 
 			HashMap<String, String> hm = util.Text.readLineInfos(line);
 
+			this.numberOfSamplesAll = Integer.parseInt(hm.get("numberOfSamplesAll"));
+			
 			this.numberOfSamples = Integer.parseInt(hm.get("numberOfSamples"));
+			
 
 			this.numberOfPrimaryIds = Integer.parseInt(hm
 					.get("numberOfPrimaryIds"));
