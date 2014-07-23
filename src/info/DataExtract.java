@@ -219,6 +219,11 @@ public class DataExtract {
 
 	}
 
+	/**
+	 * select the users according the given arrays with computer_userIds
+	 * @param userList
+	 * @param ratings
+	 */
 	public static void selectModel2(int[] userList, int... ratings) {
 
 		// check valid
@@ -679,8 +684,6 @@ public class DataExtract {
 			
 		}
 		
-		
-		
 	}
 
 	public static void main(String[] args) {
@@ -694,7 +697,6 @@ public class DataExtract {
 		
 		String userListTXT = outputRoot+File.separator+"userList_ComputerId.txt";
 		
-		selectModel2(userListTXT, "aaa.txt", 4,5);
 		
 		
 		
