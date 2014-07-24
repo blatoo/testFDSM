@@ -106,7 +106,7 @@ public class BipartiteGraph {
 
 				int cardinality = Integer.parseInt(lineInfos[2]);
 
-				adjM[cnt] = new MyBitSet();
+				adjM[cnt] = new MyBitSet(this.numberOfPrimaryIds);
 
 				if (cardinality != 0) {
 
