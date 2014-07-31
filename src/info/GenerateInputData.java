@@ -16,11 +16,12 @@ import util.Text;
 
 public class GenerateInputData {
 	
-	public static String dataSet_Original = "/home/ygu/Ying/fdsmData/NetflixOrigData/data3user.txt";
+//	public static String dataSet_Original = "/home/ygu/Ying/fdsmData/NetflixOrigData/data3user.txt";
+	public static String dataSet_Original = "D:/Ying/netflix/NetflixOrigData/data3user.txt";
 
 	public static String outputRoot = Setting.outputRoot;
 	
-	public static String infoTXT = Setting.outputRoot+File.separator+"info.txt";
+	public static String infoTXT = Setting.outputRoot+"info.txt";
 	
 	/**
 	 * generate the computer indexes for the data, the outputs are two computer
@@ -36,9 +37,9 @@ public class GenerateInputData {
 	public static void dataIndex(String inputData, int primaryColumn,
 			int secondaryColumn) {
 		
-		String infoTXT = outputRoot+File.separator+"info.txt";
-		String primaryIndexTXT = outputRoot+File.separator+"PrimaryIndex.txt";
-		String secondaryIndexTXT = outputRoot+File.separator+"SecondaryIndex.txt";
+		String infoTXT = outputRoot+"info.txt";
+		String primaryIndexTXT = outputRoot+"PrimaryIndex.txt";
+		String secondaryIndexTXT = outputRoot+"SecondaryIndex.txt";
 
 		File outputPath = new File(outputRoot);
 
@@ -62,8 +63,6 @@ public class GenerateInputData {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 
 			String line = br.readLine();
-
-			StringTokenizer st = new StringTokenizer(",");
 
 			while (line != null) {
 
@@ -154,11 +153,12 @@ public class GenerateInputData {
 	 */
 	public static void originalId_to_computerId(String dataSet_Original) {
 		
-		String inputFileName = dataSet_Original.substring(dataSet_Original.lastIndexOf(File.separator)+1);
+		String inputFileName = dataSet_Original.substring(dataSet_Original.lastIndexOf("/")+1);
+		System.out.println(inputFileName);
 		
 		inputFileName = inputFileName.replace(".txt", "_ComputerId.txt");
 		
-		String dataSet_ComputerId = outputRoot+File.separator+inputFileName;
+		String dataSet_ComputerId = outputRoot+inputFileName;
 		
 		
 		
@@ -216,6 +216,45 @@ public class GenerateInputData {
 
 	}
 	
+	/**
+	 * Read a txt file
+	 * @param inputFile 
+	 * @param from begin with 1 inclusive
+	 * @param to inclusive
+	 */
+	public static void readData(String inputFile, int from, int to){
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(inputFile));
+			String line = br.readLine();
+			int cnt = 1;
+			while(line != null){
+				if(cnt < from){
+					line = br.readLine();
+					continue;
+					
+				}
+				
+				if(cnt > to){
+					break;
+				}
+				
+				System.out.println(line);
+				
+				line = br.readLine();
+				cnt++;
+			}
+			
+			
+			
+			
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		
+		
+	}
 	
 	
 
@@ -224,6 +263,7 @@ public class GenerateInputData {
 		dataIndex(dataSet_Original, 1, 2);
 		
 		originalId_to_computerId(dataSet_Original);
+		
 		
 		
 	}

@@ -65,9 +65,11 @@ public class ReadCooccTime {
 	
 
 	public static void main(String[] args) {
-		run(Setting.outputRoot+File.separator+"Netflix_Dataset_Good_2"
-				+ "0k_converted");
-//		run(Setting.outputRoot+File.separator+"selectModel1_from0_to20000_rating45.txt");
+		
+		String inputFile = Setting.outputRoot+"Netflix_Dataset_Good_20k_converted";
+		
+		run(inputFile);
+		
 	}
 
 }

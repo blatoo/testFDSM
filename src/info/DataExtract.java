@@ -18,85 +18,17 @@ import util.Text;
 
 public class DataExtract {
 
-	// Settings for general
-	public static String dataSet_Original = "/home/ygu/Ying/fdsmData/NetflixOrigData/data3user.txt";
-
 	public static String outputRoot = Setting.outputRoot;
 
 	// you don't need to change it.
-	public static String infoTXT = outputRoot + File.separator + "info.txt";
+	public static String infoTXT = outputRoot + "info.txt";
 
-	public static String primaryIndexTXT = outputRoot + File.separator
-			+ "PrimaryIndex.txt";
+	public static String primaryIndexTXT = outputRoot + "PrimaryIndex.txt";
 
-	public static String secondaryIndexTXt = outputRoot + File.separator
-			+ "SecondaryIndex.txt";
+	public static String secondaryIndexTXt = outputRoot + "SecondaryIndex.txt";
 
-	public static String dataSet_ComputerId = outputRoot + File.separator
+	public static String dataSet_ComputerId = outputRoot
 			+ "data3user_ComputerId.txt";
-
-	/**
-	 * rewrite the original Netflix data set with computerIds.(computer_MovieId
-	 * and computer_UserId start from 0)
-	 * 
-	 * @param dataSet_Original
-	 * @param dataSet_ComputerId
-	 */
-	public static void OriginalId_to_ComputerId(String dataSet_Original,
-			String dataSet_ComputerId) {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(
-					dataSet_Original));
-			BufferedWriter bw = new BufferedWriter(new FileWriter(
-					dataSet_ComputerId));
-
-			HashMap<String, String> infoHM = Text.readInfoTXT(infoTXT);
-
-			int numberOfPrimaryIds = Integer.parseInt(infoHM
-					.get("numberOfPrimaryIds"));
-			int numberOfSecondaryIds = Integer.parseInt(infoHM
-					.get("numberOfSecondaryIds"));
-
-			bw.write("#numberOfPrimaryIds = " + numberOfPrimaryIds
-					+ ", numberOfSecondaryIds = " + numberOfSecondaryIds);
-			bw.newLine();
-
-			MyBitSet userId_List = new MyBitSet();
-
-			int Computer_UserId = -1;
-
-			String line = br.readLine();
-
-			while (line != null) {
-
-				StringTokenizer st = new StringTokenizer(line, ",");
-				int movieId = Integer.valueOf(st.nextToken());
-				int userId = Integer.valueOf(st.nextToken());
-				String rating = st.nextToken();
-
-				int computer_MovieId = movieId - 1;
-
-				if (userId_List.get(userId) == false) {
-					userId_List.set(userId);
-					Computer_UserId++;
-				}
-
-				bw.write(computer_MovieId + "," + Computer_UserId + ","
-						+ rating + System.lineSeparator());
-
-				line = br.readLine();
-
-			}
-
-			bw.close();
-			br.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
-
-	}
 
 	/**
 	 * Extract InputData for BipartiteGraph from original Netflix data set.
@@ -113,8 +45,8 @@ public class DataExtract {
 	public static void selectMode1(String dataSet_ComputerId, int from, int to,
 			int... ratings) {
 
-		String outputFile = outputRoot + File.separator + "selectModel1_"
-				+ "from" + from + "_to" + to + "_rating";
+		String outputFile = outputRoot + "selectModel1_" + "from" + from
+				+ "_to" + to + "_rating";
 
 		MyBitSet ratingsMBS = new MyBitSet();
 
@@ -126,6 +58,8 @@ public class DataExtract {
 		}
 
 		outputFile = outputFile + ".txt";
+		
+		System.out.println("Output File is: "+outputFile);
 
 		TIntObjectHashMap<MyBitSet> user_MoviesList = new TIntObjectHashMap<MyBitSet>();
 
@@ -220,9 +154,13 @@ public class DataExtract {
 	}
 
 	/**
-	 * select the users according the given arrays with computer_userIds
+	 * select the users after the given arrays with computer_userIds
+	 * 
 	 * @param userList
+	 *            an array of computer_UserIds
 	 * @param ratings
+	 *            the subset of [1,2,3,4,5], for example: 4,5 means choose the
+	 *            record which rating is 4 or 5
 	 */
 	public static void selectModel2(int[] userList, int... ratings) {
 
@@ -250,6 +188,8 @@ public class DataExtract {
 
 		String outputFile = outputRoot + File.separator + "selectModel2_rating"
 				+ rats + ".txt";
+		
+		System.out.println("Output File is: "+outputFile);
 
 		// construct user_MoviesList
 		TIntObjectHashMap<MyBitSet> user_MoviesList = new TIntObjectHashMap<MyBitSet>();
@@ -367,6 +307,17 @@ public class DataExtract {
 
 	}
 
+	/**
+	 * select the users after the given arrays with computer_userIds
+	 * 
+	 * @param userList
+	 *            an array of computer_UserIds
+	 * @param outputFileName
+	 *            the name of the output file, you don't need to give the path
+	 * @param ratings
+	 *            the subset of [1,2,3,4,5], for example: 4,5 means choose the
+	 *            record which rating is 4 or 5
+	 */
 	public static void selectModel2(int[] userList, String outputFileName,
 			int... ratings) {
 
@@ -392,8 +343,10 @@ public class DataExtract {
 		//
 		// }
 
-		String outputFile = outputRoot + File.separator + outputFileName;
+		String outputFile = outputRoot + outputFileName;
 
+		System.out.println("Output File is: "+outputFile);
+		
 		// construct user_MoviesList
 		TIntObjectHashMap<MyBitSet> user_MoviesList = new TIntObjectHashMap<MyBitSet>();
 
@@ -510,6 +463,13 @@ public class DataExtract {
 
 	}
 
+	/**
+	 * select the users after the given arrays with computer_userIds in a TXT file, the TXT file is a list which Computer_UserIds, each line contain one Computer_UserId
+	 * 
+	 * @param userListTXT
+	 * @param outputFileName
+	 * @param ratings
+	 */
 	public static void selectModel2(String userListTXT, String outputFileName,
 			int... ratings) {
 
@@ -547,7 +507,9 @@ public class DataExtract {
 			System.exit(-1);
 		}
 
-		String outputFile = outputRoot + File.separator + outputFileName;
+		String outputFile = outputRoot + outputFileName;
+		
+		System.out.println("Output File is: "+outputFile);
 
 		// construct user_MoviesList
 		TIntObjectHashMap<MyBitSet> user_MoviesList = new TIntObjectHashMap<MyBitSet>();
@@ -662,47 +624,18 @@ public class DataExtract {
 		}
 
 	}
-	
-	public static void test(){
-		
-		try {
-			
-			String outputFile = outputRoot+File.separator+"userList_ComputerId.txt";
-			BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile));
-			
-			for(int i=0; i<10000;i++){
-				bw.write(i+System.lineSeparator());
-				
-			}
-			
-			
-			
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(-1);
-			
-		}
-		
-	}
+
 
 	public static void main(String[] args) {
 
-		// OriginalId_to_ComputerId(dataSet_Original, dataSet_ComputerId);
-
 		// selectMode1(dataSet_ComputerId, 0, 10000, 4, 5);
 
+		// selectModel2(userList, 4, 5);
 
-//		selectModel2(userList, 4, 5);
-		
-		String userListTXT = outputRoot+File.separator+"userList_ComputerId.txt";
-		
-		
-		
-		
-		
-		
-		
+		String userListTXT = outputRoot + File.separator
+				+ "userList_ComputerId.txt";
+
+		selectMode1(dataSet_ComputerId, 0, 20000, 4, 5);
 
 	}
 

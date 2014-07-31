@@ -18,17 +18,18 @@ import util.Text;
 
 public class dataConvert {
 
-	public static String inputFile = "/home/ygu/Ying/fdsmData/vervor/Good_Ratings/Netflix_Dataset_Good";
+	public static String inputFile = "D:/Ying/netflix/testNetflix/vervor/Good_Ratings/Netflix_Dataset_Good";
 
 	public static String outputRoot = Setting.outputRoot;
 
-	public static String infoTXT = outputRoot + File.separator + "info.txt";
+	public static String infoTXT = outputRoot + "info.txt";
 
-	public static void convert(String intputFile) {
+	public static void convert(String inputFile) {
 
 		int pointPos = inputFile.lastIndexOf(".");
+		
 
-		StringBuffer fName = new StringBuffer(inputFile.substring(inputFile.lastIndexOf(File.separator)+1));
+		StringBuffer fName = new StringBuffer(inputFile.substring(inputFile.lastIndexOf("/")+1));
 
 		if (pointPos < 0) {
 			fName = fName.append("_converted");
@@ -36,8 +37,10 @@ public class dataConvert {
 			fName.insert(pointPos, "_converted");
 		}
 
-		String outputFile = outputRoot + File.separator + fName;
-
+		String outputFile = outputRoot + fName;
+		
+		System.out.println("OutputFile: "+outputFile);
+		
 		TIntObjectHashMap<MyBitSet> userId_movieIdList = new TIntObjectHashMap<MyBitSet>();
 
 		int sumOfCardinality = 0;
@@ -106,6 +109,8 @@ public class dataConvert {
 	}
 
 	public static void main(String[] args) {
+		
+		String inputFile = "D:/Ying/netflix/testNetflix/vervor/Good_Ratings/Netflix_Dataset_Good_100k";
 
 		 convert(inputFile);
 
