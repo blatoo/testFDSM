@@ -66,13 +66,13 @@ public class SwapTime {
 
 
 	public static void main(String[] args) {
-		String inputFile = Setting.outputRoot+"Netflix_Dataset_Good_20k_converted";
+		String inputFile = Setting.outputRoot+"Netflix_Dataset_Good_10k_converted";
 
 		BipartiteGraph bG = new BipartiteGraph(inputFile);
 		
 		System.out.println(bG.numberOfEdges);
 		
-		int numberOfSwaps = (int)Math.log(bG.numberOfEdges)*bG.numberOfSamples;
+		int numberOfSwaps = (int) (Math.log(bG.numberOfEdges)*bG.numberOfEdges);
 		
 		System.out.println("Swap steps is "+numberOfSwaps);
 		

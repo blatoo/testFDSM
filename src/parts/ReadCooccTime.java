@@ -63,10 +63,20 @@ public class ReadCooccTime {
 		
 	}
 	
+	public static void writeCoocc(int[][] coocc){
+		for(int i=0; i<coocc.length; i++){
+			
+			
+			
+		}
+		
+		
+	}
+	
 
 	public static void main(String[] args) {
 		
-		String inputFile = Setting.outputRoot+"Netflix_Dataset_Good_20k_converted";
+		String inputFile = Setting.outputRoot+"Netflix_Dataset_Good_10k_converted";
 		
 		run(inputFile);
 		
